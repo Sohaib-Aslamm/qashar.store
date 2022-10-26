@@ -1,0 +1,123 @@
+{% extends 'baseAdmin.html' %}
+
+{% load static %}
+
+    {% block title %} <title>Testimonial | Section</title> {% endblock title %}
+
+{% block header %}
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-greeno">Testimonial Section</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Dashboard</a></li>
+              <li class="breadcrumb-item text-aspire">Testimonial</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid mt-5">
+
+<div class="row container-fluid justify-content-end">
+        <button class="btn bg-greeno white" data-toggle="modal" data-target="#exampleModalCenter">+ Add Testimonial</button>
+</div>
+
+    <table class="table table-hover table-bordered mt-5">
+  <thead class="bg-greeno white">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Designation</th>
+      <th scope="col">Testimonial</th>
+      <th scope="col">Profile</th>
+      <th scope="col" class="text-center">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in WPSDT %}
+    <tr>
+      <td>{{ data.name }}</td>
+      <td>{{ data.designation }}</td>
+      <td>{{ data.say_something }}</td>
+      <td><img src="{{ data.icon.url }}" style="width: 100px; height: 100px"></td>
+     <td class="text-center">
+          <a class="text-center mx-2" href="/Update/{{ data.id }}/PeopleSay"><i class="fa fa-edit fa-lg" style="color: green;"></i> </a>
+          <a class="text-center mx-2" href="/Delete/{{ data.id }}/PeopleSay"><i class="fa fa-trash fa-lg" style="color: red;"></i> </a>
+      </td>
+        </tr>
+  {% endfor %}
+  </tbody>
+
+</table>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-greeno">
+        <h5 class="modal-title white" id="exampleModalLongTitle">What People Say</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+      <div class="modal-body">
+
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="white">Name</label>
+                    {{ form.name }}
+                </div>
+                 <div class="col-4">
+                    <label class="white">Designation</label>
+                    {{ form.designation }}
+                </div>
+                <div class="col-4">
+                    <label class="white">Profile</label>
+                    {{ form.icon }}
+                </div>
+            </div>
+
+          <div class="row mb-3">
+                 <div class="col-12">
+                    <label class="white">Testimonial</label>
+                    {{ form.say_something }}
+                </div>
+            </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-greeno white" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn bg-greeno white">Save Information</button>
+      </div>
+             </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,240 @@
+{% extends 'baseAdmin.html' %}
+
+
+{% load static %}
+
+    {% block title %} <title>Amazon | Products</title> {% endblock title %}
+
+{% block header %}
+
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-greeno">Amazon Products Section</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Dashboard</a></li>
+              <li class="breadcrumb-item text-aspire">Amazon Products</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid mt-5">
+
+<div class="row container-fluid justify-content-end">
+        <button class="btn bg-greeno white" data-toggle="modal" data-target="#exampleModalCenter">+ Add Product</button>
+</div>
+
+    <table class="table table-hover table-bordered mt-5">
+  <thead class="bg-greeno white">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">CPrice</th>
+      <th scope="col">dPrice</th>
+      <th scope="col">Color</th>
+      <th scope="col">Category</th>
+      <th scope="col">availability</th>
+        <th scope="col" class="text-center">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in PRDTDT %}
+    <tr>
+      <td>{{ data.title }}</td>
+      <td>{{ data.cPrice }}</td>
+      <td>{{ data.dPrice }}</td>
+      <td>{{ data.color }}</td>
+      <td>{{ data.category }}</td>
+      <td>{{ data.availability }}</td>
+     <td class="text-center">
+          <a class="text-center mx-2" href="/Update/{{ data.sNo }}/amazonProducts"><i class="fa fa-edit fa-lg" style="color: green;"></i> </a>
+          <a class="text-center mx-2" href="/Delete/{{ data.sNo }}/amazonProducts"><i class="fa fa-trash fa-lg" style="color: red;"></i> </a>
+      </td>
+        </tr>
+  {% endfor %}
+  </tbody>
+
+</table>
+
+
+ <ul class="pagination m-b0 p-b0 ">
+
+    {% if PRDTDT.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ PRDTDT.previous_page_number }}"><span style="color:#FFCC00;">Previous</span></a></li>
+    {% endif %}
+
+       <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/adminAmazonProducts?page=1"><span style="color:#FFCC00;">First</span></a></li>
+
+
+    {% for tpl in pageList %}
+          <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/adminAmazonProducts?page={{ tpl }}"><span style="color:#FFCC00;">{{ tpl }}</span></a></li>
+    {% endfor %}
+
+    {% if PRDTDT.has_next  %}
+          <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ PRDTDT.next_page_number }}"><span style="color:#FFCC00;">Next</span></a></li>
+          <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ lastPage }}"><span style="color:#FFCC00;">Last</span></a></li>
+    {% endif %}
+
+ </ul>
+ 
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-greeno">
+        <h5 class="modal-title white" id="exampleModalLongTitle">Drone Products </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+      <div class="modal-body">
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>Title</label>
+                        {{ form.title }}
+                </div>
+                  <div class="col-2">
+                    <label>C Price</label>
+                        {{ form.cPrice }}
+                </div>
+                <div class="col-2">
+                    <label>D Price</label>
+                        {{ form.dPrice }}
+                </div>
+                 <div class="col-2">
+                    <label>Category</label>
+                        {{ form.category }}
+                </div>
+            </div>
+
+                <div class="row mb-3">
+                       <div class="col-3">
+                    <label>Brand</label>
+                        {{ form.brand }}
+                </div>
+               <div class="col-3">
+                    <label>Color</label>
+                        {{ form.color }}
+                </div>
+                    <div class="col-3">
+                    <label>Availability</label>
+                        {{ form.availability }}
+                </div>
+                     <div class="col-3">
+                    <label>Featured</label>
+                        {{ form.featured }}
+                </div>
+
+            </div>
+
+
+
+          <div class="row mb-4">
+               <div class="col-3">
+                    <label>Label</label>
+                        {{ form.heading1 }}
+                </div>
+               <div class="col-3">
+                    <label>Description</label>
+                        {{ form.answer1 }}
+                </div>
+              <div class="col-3">
+                    <label>Label</label>
+                        {{ form.heading2 }}
+                </div>
+               <div class="col-3">
+                    <label>Description</label>
+                        {{ form.answer2 }}
+                </div>
+          </div>
+
+
+           <div class="row mb-4">
+               <div class="col-3">
+                    <label>Label</label>
+                        {{ form.heading3 }}
+                </div>
+               <div class="col-3">
+                    <label>Description</label>
+                        {{ form.answer3 }}
+                </div>
+              <div class="col-3">
+                    <label>Label</label>
+                        {{ form.heading4 }}
+                </div>
+               <div class="col-3">
+                    <label>Description</label>
+                        {{ form.answer4 }}
+                </div>
+          </div>
+
+
+
+
+          <div class="row mb-4">
+                <div class="col-12">
+                    <label>Amazon Buy Link</label>
+                        {{ form.buyLink }}
+                </div>
+            </div>
+
+              <div class="row mb-4">
+                <div class="col-12">
+                    <label>Description</label>
+                    {{ form.description }}
+                </div>
+            </div>
+
+          <div class="row mb-3">
+              <div class="col-4">
+                  <label>Main Icon</label>
+                  {{ form.mainIcon }}
+              </div>
+               <div class="col-4">
+                  <label>Created Date</label>
+                  {{ form.created_at }}
+              </div>
+
+
+
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-greeno white" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn bg-greeno white">Save Post</button>
+      </div>
+             </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}

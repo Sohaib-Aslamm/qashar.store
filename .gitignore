@@ -5,7 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
-
+media/
+Home/migrations/
+adminpannel/migrations/
+qashar/settings.py
 # Distribution / packaging
 .Python
 build/

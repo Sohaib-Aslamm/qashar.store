@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block title %}<title></title> {% endblock title %}
+
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'Assets/adminLTE/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'Assets/adminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'Assets/adminLTE/dist/css/adminlte.min.css' %}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'Assets/adminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+
+</head>
+<style>
+
+    .bg-aspire{
+        background-color: #7F8E4B;
+
+    }
+
+    .white{
+
+        color: #FFCC00;
+          border-color: #FFCC00;
+        border-radius: 1px;
+    }
+
+    .bg-greeno{
+        background-color: white;
+        border-color: #FFCC00;
+        border-radius: 1px;
+    }
+
+    .text-greeno{
+
+        color: #FFCC00;
+    }
+
+
+</style>
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="container-sm col-7">
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+</div>
+<div class="wrapper">
+
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{% static 'Assets/user.jpg' %}" alt="Q__Store" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white">
+
+
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars text-greeno"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/admin" class="nav-link text-greeno font-weight-bolder">Home</a>
+      </li>
+{#      <li class="nav-item d-none d-sm-inline-block">#}
+{#        <a href="#" class="nav-link text-greeno font-weight-bolder">Contact</a>#}
+{#      </li>#}
+
+          <li class="nav-item d-none d-sm-inline-block">
+              <a href="/user_logout" class="nav-link text-greeno font-weight-bolder"><i class="fas fa-power-off"> Logout</i></a>
+      </li>
+
+    </ul>
+
+
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar elevation-4 " >
+    <!-- Brand Logo -->
+{#    <a href="index3.html" class="brand-link">#}
+{#      <img src="{% static 'Assets/dist/img/AdminLTELogo.png' %}" alt="greenage Logo" class="brand-image img-circle elevation-3" style="opacity: .8">#}
+{#      <span class="brand-text text-greeno font-weight-bold">Portfolio Xender</span>#}
+{#    </a>#}
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'Assets/user.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block text-greeno font-weight-bold">{{ user.username }}</a>
+        </div>
+      </div>
+
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav  nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+              <li class="nav-item">
+                <a href="https://qashar.store/" class="nav-link bg-greeno" target="_blank">
+                  <i class="fas fa-box white"></i>
+                    <p class="text-greeno px-2"> Your Website</p>
+                </a>
+              </li>
+
+
+            <li class="nav-item ">
+                <a href="/adminAmazonProducts" class="nav-link bg-greeno">
+                  <i class="far fa-address-card white"></i>
+                  <p class="text-greeno px-2">Amazon Products</p>
+                </a>
+              </li>
+
+
+
+             <li class="nav-item ">
+                <a href="/adminPeopleSay" class="nav-link bg-greeno">
+                  <i class="far fa-address-card white"></i>
+                  <p class="text-greeno px-2">Testimonial Section</p>
+                </a>
+              </li>
+
+
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+
+
+  <div class="content-wrapper bg-white">
+
+
+
+   {% block header %} {% endblock header %}
+
+
+
+  {% block content %}  {% endblock content %}
+
+
+
+  </div>
+
+
+
+
+
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2022 <a class="text-greeno">Q__Store</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+    </div>
+  </footer>
+
+
+</div>
+<!-- ./wrapper -->
+
+</body>
+
+<!-- jQuery -->
+<script src="{% static 'Assets/adminLTE/plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'Assets/adminLTE/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'Assets/adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Sparkline -->
+<script src="{% static 'Assets/adminLTE/plugins/sparklines/sparkline.js' %}"></script>
+
+<script src="{% static 'Assets/adminLTE/plugins/moment/moment.min.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'Assets/adminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+<!-- overlayScrollbars -->
+<script src="{% static 'Assets/adminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'Assets/adminLTE/dist/js/adminlte.js' %}"></script>
+<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+
+<script>
+     CKEDITOR.replace( 'editor1' );
+</script>
+
+</html>

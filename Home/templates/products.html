@@ -1,0 +1,112 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Q__Products</title>{% endblock title %}
+
+{% block content %}
+
+
+     <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/products/products.png' %});">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        <h2>Products</h2>
+        <ol>
+          <li><a href="/Home">Home</a></li>
+          <li>Products</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+<!-- ======= Our Projects Section ======= -->
+    <section id="projects" class="projects">
+      <div class="container" data-aos="fade-up">
+
+              <div class="section-header">
+          <h2>Our Products</h2>
+            <p><span class="text-warning fw-bold">Q__Store</span> is offering wide range amazon specific products meanwhile offering local services to it's citizens.</p>
+        </div>
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+
+          <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            {% for categ in PRDCTGRY %}
+              <li data-filter=".filter-{{ categ.category }}">{{ categ.category }}</li>
+            {% endfor %}
+
+          </ul><!-- End Projects Filters -->
+
+<div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+
+
+    {% for prd in PRDCTS %}
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-{{ prd.category }} ">
+        <div class="portfolio-content h-100 card">
+        <img src="{{ prd.mainIcon.url }}" class="img-fluid rounded mx-auto" alt="{{ prd.title }}" style="width:400px; height:400px;">
+                <div class="portfolio-info">
+                  <h4>{{ prd.brand }}</h4>
+                
+                  <a href="{{ prd.mainIcon.url }}" title="{{ prd.title }}" data-gallery="portfolio-gallery-{{ prd.category }}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+
+                </div>
+              </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="{{ prd.buyLink }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Buy</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="/DetailRecord/{{ prd.sNo }}/productDetail" class="btn btn-warning text-white btn-block mt-2"><i class="fa fa-eye"></i> | Detail</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="#" class="btn btn-warning text-white mt-2"><strike>${{ prd.cPrice }}</strike> <b>${{ prd.dPrice }}</b></a>
+                    </div>
+                </div>
+        </div><!-- End Projects Item -->
+
+    {% endfor %}
+
+          </div><!-- End Projects Container -->
+
+        </div>
+
+
+      </div>
+
+    </section><!-- End Our Projects Section -->
+
+
+  <!----------------------------------------------------Pagination Start ------------------------------------------->
+
+    <div class="mt-4 mb-4 container text-center">
+        <ul class="pagination m-b0 p-b0 ">
+
+            {% if PRDTDT.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ PRDTDT.previous_page_number }}"><span style="color:#FFCC00;">Previous</span></a></li>
+            {% endif %}
+
+               <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/home?page=1"><span style="color:#FFCC00;">First</span></a></li>
+
+
+            {% for tpl in pageList %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/home?page={{ tpl }}"><span style="color:#FFCC00;">{{ tpl }}</span></a></li>
+            {% endfor %}
+
+            {% if PRDTDT.has_next  %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ PRDTDT.next_page_number }}"><span style="color:#FFCC00;">Next</span></a></li>
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ lastPage }}"><span style="color:#FFCC00;">Last</span></a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+
+  <!----------------------------------------------------Pagination End ------------------------------------------->
+
+
+
+
+{% endblock content %}

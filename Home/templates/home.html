@@ -1,0 +1,181 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Q__Store</title>{% endblock title %}
+
+{% block content %}
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+
+    <div class="info d-flex align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2 data-aos="fade-down">Welcome to <span class="text-warning">Q__Store</span></h2>
+              <p data-aos="fade-up"><span class="text-warning fw-bold">Q store</span> was founded in <span class="text-warning fw-bold">2020</span>
+                  the first ever amazon enabler store situated in
+                <span class="text-warning fw-bold">KUNRi</span> with it's active
+            online services for local citizens. </p>
+            <a data-aos="fade-up" data-aos-delay="200" href="#projects" class="btn-get-started">Get Started</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <div class="carousel-item active" style="background-image: url({% static 'Assets/Qashar/img/slider1.jpg' %})"></div>
+      <div class="carousel-item" style="background-image: url({% static 'Assets/Qashar/img/slider2.jpg' %})"></div>
+
+
+      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+
+    <!-- ======= Our Projects Section ======= -->
+    <section id="projects" class="projects">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Featured Products</h2>
+            <p><span class="text-warning fw-bold">Q__Store</span> is offering wide range amazon specific products meanwhile offering local services to it's citizens.</p>
+        </div>
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+
+          <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            {% for categ in PRDCTGRY %}
+              <li data-filter=".filter-{{ categ.category }}">{{ categ.category }}</li>
+            {% endfor %}
+
+          </ul><!-- End Projects Filters -->
+
+<div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+
+
+    {% for prd in PRDCTS %}
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-{{ prd.category }}">
+        <div class="portfolio-content h-100 card">
+        <img src="{{ prd.mainIcon.url }}" class="img-fluid rounded mx-auto" alt="{{ prd.title }}" style="width:400px; height:400px;">
+                <div class="portfolio-info">
+                  <h4>{{ prd.brand }}</h4>
+                 
+                  <a href="{{ prd.mainIcon.url }}" title="{{ prd.title }}" data-gallery="portfolio-gallery-{{ prd.category }}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+
+                </div>
+              </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="{{ prd.buyLink }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Buy</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="/DetailRecord/{{ prd.sNo }}/productDetail" class="btn btn-warning text-white btn-block mt-2"><i class="fa fa-eye"></i> | Detail</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="#" class="btn btn-warning text-white mt-2"><strike>${{ prd.cPrice }}</strike> <b>${{ prd.dPrice }}</b></a>
+                    </div>
+                </div>
+        </div><!-- End Projects Item -->
+
+    {% endfor %}
+
+          </div><!-- End Projects Container -->
+
+        </div>
+
+
+      </div>
+
+    </section><!-- End Our Projects Section -->
+
+
+  <!----------------Pagination Start-------------------------->
+
+    <div class="mt-4 mb-4 container text-center">
+        <ul class="pagination m-b0 p-b0 ">
+
+            {% if PRDTDT.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ PRDTDT.previous_page_number }}"><span style="color:#FFCC00;">Previous</span></a></li>
+            {% endif %}
+
+               <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/home?page=1"><span style="color:#FFCC00;">First</span></a></li>
+
+
+            {% for tpl in pageList %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/home?page={{ tpl }}"><span style="color:#FFCC00;">{{ tpl }}</span></a></li>
+            {% endfor %}
+
+            {% if PRDTDT.has_next  %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ PRDTDT.next_page_number }}"><span style="color:#FFCC00;">Next</span></a></li>
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ lastPage }}"><span style="color:#FFCC00;">Last</span></a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+
+  <!----------------------------------------------------Pagination End ------------------------------------------->
+
+
+   <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Testimonials</h2>
+          <p>testimonials define </p>
+        </div>
+
+        <div class="slides-2 swiper">
+          <div class="swiper-wrapper">
+
+
+              {% for testim in testimonials %}
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="{{ testim.icon.url }}" class="testimonial-img" alt="">
+                  <h3>{{ testim.name }}</h3>
+                  <h4>{{ testim.designation }}</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                            {{ testim.say_something }}
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+                {% endfor %}
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+  </main>
+{% endblock content %}

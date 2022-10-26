@@ -1,0 +1,126 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Q__Store</title>{% endblock title %}
+
+{% block content %}
+
+
+
+
+<!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/breadcrumbs-bg.jpg' %});">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        <h2>Product Details</h2>
+        <ol>
+          <li><a href="/Home">Home</a></li>
+          <li>Product Details</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+
+    <!-- ======= Service Details Section ======= -->
+    <section id="service-details" class="service-details">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="services-list">
+              <a href="#" class="active">{{ rec.category }}</a>
+
+            </div>
+
+            <div class="portfolio-info">
+              <h3>Product Detail</h3>
+              <ul>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <strong>Price:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                         <strike>${{ rec.cPrice }}</strike> <b>${{ rec.dPrice }}</b>
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>Brand:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                        {{ rec.brand }}
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>Color:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                        {{ rec.color }}
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>Availability:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                        {{ rec.availability }}
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>{{ rec.heading1 }}:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                        {{ rec.answer1 }}
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>{{ rec.heading2 }}:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                       {{ rec.answer2 }}
+                    </div>
+                </div>
+                        <div class="row">
+                    <div class="col-lg-6">
+                        <strong>{{ rec.heading3 }}:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                        {{ rec.answer3 }}
+                    </div>
+                </div>
+                   <div class="row">
+                    <div class="col-lg-6">
+                        <strong>{{ rec.heading4 }}:</strong>
+                    </div>
+                     <div class="col-lg-6">
+                         {{ rec.answer4 }}
+                    </div>
+                </div>
+              </ul>
+            </div>
+                <div class="row">
+                    <a href="{{ rec.buyLink }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Buy Product</a>
+                </div>
+          </div>
+
+          <div class="col-lg-8">
+            <img src="{{ rec.mainIcon.url }}" alt="" class="img-fluid services-img" style="width: 800px; height: 650px;">
+            <h3>{{ rec.title }}</h3>
+            <hr>
+            <p>
+              {{ rec.description }}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Service Details Section -->
+
+
+{% endblock content %}

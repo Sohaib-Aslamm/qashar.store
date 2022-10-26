@@ -1,0 +1,87 @@
+{% extends 'baseAdmin.html' %}
+
+{% load static %}
+
+
+    {% block title %} <title>Q__Store | Dashboard</title> {% endblock title %}
+
+{% block header %}
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+
+
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Home</a></li>
+              <li class="breadcrumb-item text-aspire">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+{% block content %}
+
+   <!-- User Information -->
+
+      <div class="container-fluid">
+            <div class="row">
+                <div class="col-10">
+                   <h1 class="m-0 text-greeno">My inbox <i class="fa fa-arrow-alt-circle-down"></i> </h1>
+                </div>
+                <div class="col-2">
+                   <a href="/MasterDelete/Message" class="btn btn-warning text-white">Delete Full Inbox</a>
+                </div>
+            </div>
+      </div>
+<hr>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <!-- ./col -->
+
+
+            {% for message in my_messages %}
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box " style="background-color: #404040; color: aliceblue;">
+              <div class="inner">
+                <p>{{ message.name }}</p>
+
+                <p>{{ message.email }}</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-envelope"></i>
+              </div>
+              <a href="/view_Message/{{ message.id }}" class="small-box-footer">Read Message <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/Delete/{{ message.id }}/Messages" class="small-box-footer"><span style="color: #FFCC00;">Delete Message <i class="fas fa-trash"></i></span></a>
+            </div>
+          </div>
+            {% endfor %}
+
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+
+
+     {% endblock content %}
+
+
