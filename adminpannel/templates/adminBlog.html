@@ -1,0 +1,168 @@
+{% extends 'baseAdmin.html' %}
+
+
+{% load static %}
+
+    {% block title %} <title>User Blog | Section</title> {% endblock title %}
+
+{% block header %}
+
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-greeno">Blog Section</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Dashboard</a></li>
+              <li class="breadcrumb-item text-aspire">User Blog</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid mt-5">
+
+<div class="row container-fluid justify-content-end">
+        <button class="btn bg-greeno white" data-toggle="modal" data-target="#exampleModalCenter">+ Create Post</button>
+</div>
+
+    <table class="table table-hover table-bordered mt-5">
+  <thead class="bg-greeno white">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Heading</th>
+      <th scope="col">Created_at</th>
+      <th scope="col">Main Icon</th>
+      <th scope="col" class="text-center">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in BLGdata %}
+    <tr>
+      <td>{{ data.title }}</td>
+      <td>{{ data.heading }}</td>
+      <td>{{ data.created_at }}</td>
+      <td><img src="{{ data.Icon.url }}" style="width: 50px; height: 50px;"></td>
+     <td class="text-center">
+          <a class="text-center mx-2" href="/Update/{{ data.sNo }}/blog"><i class="fa fa-edit fa-lg" style="color: green;"></i> </a>
+          <a class="text-center mx-2" href="/Delete/{{ data.sNo }}/blog"><i class="fa fa-trash fa-lg" style="color: red;"></i> </a>
+      </td>
+        </tr>
+ {% endfor %}
+
+  </tbody>
+
+</table>
+
+
+ <ul class="pagination m-b0 p-b0 white>
+
+    {% if BLGdata.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ BLGdata.previous_page_number }}"><span style="color:#db253b;">Previous</span></a></li>
+    {% endif %}
+
+       <li class="page-item" style="color:#db253b; border: 1px #db253b;"><a class="page-link" href="/adminblog?page=1"><span style="color:#db253b;">First</span></a></li>
+
+
+    {% for tpl in pageList %}
+          <li class="page-item" style="color:#db253b; border: 1px #db253b;"><a class="page-link" href="/adminblog?page={{ tpl }}"><span style="color:#db253b;">{{ tpl }}</span></a></li>
+    {% endfor %}
+
+    {% if BLGdata.has_next  %}
+          <li class="page-item" style="color:#db253b; border: 1px #db253b;"><a class="page-link" href="?page={{ BLGdata.next_page_number }}"><span style="color:#db253b;">Next</span></a></li>
+          <li class="page-item" style="color:#db253b; border: 1px #db253b;"><a class="page-link" href="?page={{ lastPage }}"><span style="color:#db253b;">Last</span></a></li>
+    {% endif %}
+
+ </ul>
+
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-greeno">
+        <h5 class="modal-title white" id="exampleModalLongTitle">User Blog </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+       <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+      <div class="modal-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="enter tile" required>
+                </div>
+                  <div class="col-6">
+                    <label>Heading</label>
+                       <input type="text" name="heading" class="form-control" placeholder="enter heading" required>
+                </div>
+            </div>
+           <div class="row mb-3">
+                <div class="col-4">
+                    <label>Tags</label>
+                       <input type="text" name="tags" class="form-control" placeholder="example (AI, IOT, CISCO)" required>
+                </div>
+                  <div class="col-4">
+                    <label>Quote</label>
+                       <input type="text" name="quote" class="form-control" placeholder="write quote" required>
+                </div>
+                <div class="col-4">
+                    <label>Quote_By</label>
+                       <input type="text" name="quote_by" class="form-control" placeholder="quote author" required>
+                </div>
+            </div>
+          <div class="row mb-3">
+                  <div class="col-6">
+                    <label>Main Icon</label>
+                       <input type="file" name="icon" class="form-control" required>
+                </div>
+                <div class="col-6">
+                    <label>Created_at</label>
+                       <input type="date" name="created_at" class="form-control" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Create Post</label><br>
+              <textarea class="form-control" name="editor1"></textarea>
+                </div>
+            </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-greeno white" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn bg-greeno white">Save Post</button>
+      </div>
+             </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}

@@ -4,6 +4,7 @@ urlpatterns = [
         path('admin', views.adminHome, name="admin"),
         path('adminAmazonProducts', views.adminAmazonProducts, name="adminAmazonProducts"),
         path('adminPeopleSay', views.adminPeopleSay, name="adminPeopleSay"),
+        path('adminblog', views.adminblog, name="adminblog"),
         path('view_Message/<int:id>', views.viewMessage, name="view_Message"),
         path('user_login', views.user_login, name="user_login"),
         path('user_logout', views.user_logout, name="user_logout"),

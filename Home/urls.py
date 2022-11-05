@@ -9,6 +9,8 @@ urlpatterns = [
     path('Products', views.Products, name="Products"),
     path('Services', views.Services, name="Services"),
     path('Contact', views.Contact, name="Contact"),
+    path('blog', views.blogHome, name="blog"),
+    path('addReview', views.blogReview, name="addReview"),
     path('DetailRecord/<int:id>/<str:type>', views.DetailRecord, name="DetailRecord")
 
 ]

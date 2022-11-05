@@ -1,0 +1,34 @@
+.content{
+  margin-top: 30%;
+
+}
+.sohaib-img{
+  margin-top: 100px;
+  width: 300px;
+  height: 300px;
+  filter: grayscale(1);
+  /*border-radius: 50%;*/
+
+
+
+}
+
+.sohaib-img:hover {
+
+  margin-top: 50px;
+  width: 300px;
+  height: 300px;
+  filter: grayscale(0);
+  border-radius: 50%;
+  transition: 3s;
+  cursor: pointer;
+
+}
+
+.site-bg-dark{
+  color: darkgrey;
+}
+
+.common-color{
+  color: #d72323;
+}

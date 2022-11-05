@@ -1,0 +1,94 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Q__Blog</title>{% endblock title %}
+
+{% block content %}
+
+
+     <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/blog_banner.jpg' %});">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        <h2>Q__Blog</h2>
+        <ol>
+          <li><a href="/Home">Home</a></li>
+          <li>Blog</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+<!-- ======= Our Projects Section ======= -->
+    <section id="projects" class="projects">
+      <div class="container" data-aos="fade-up">
+
+
+<div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+
+
+     {% for post in BLOGDATA %}
+
+        <div class="col-lg-4 col-md-6 portfolio-item">
+        <div class="portfolio-content h-100">
+        <img src="{{ post.Icon.url }}" class="img-fluid rounded mx-auto" alt="{{ post.tags }}" style="width:400px; height:400px;">
+                <div class="portfolio-info">
+                  <h4>{{ post.created_at }}</h4>
+                
+                  <a href="{{ post.Icon.url }}" title="{{ post.title }}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+
+                </div>
+              </div>
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <a href="/DetailRecord/{{ post.sNo }}/blogDetail"><u>{{ post.title }}</u></a>
+                    </div>
+
+                </div>
+        </div><!-- End Projects Item -->
+
+    {% endfor %}
+
+          </div><!-- End Projects Container -->
+
+        </div>
+
+
+      </div>
+
+    </section><!-- End Our Projects Section -->
+
+
+  <!----------------------------------------------------Pagination Start ------------------------------------------->
+
+    <div class="mt-4 mb-4 container text-center">
+        <ul class="pagination m-b0 p-b0 ">
+
+            {% if BLOGDATA.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ BLOGDATA.previous_page_number }}"><span style="color:#FFCC00;">Previous</span></a></li>
+            {% endif %}
+
+               <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/blog?page=1"><span style="color:#FFCC00;">First</span></a></li>
+
+
+            {% for tpl in pageList %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="/blog?page={{ tpl }}"><span style="color:#FFCC00;">{{ tpl }}</span></a></li>
+            {% endfor %}
+
+            {% if BLOGDATA.has_next  %}
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ BLOGDATA.next_page_number }}"><span style="color:#FFCC00;">Next</span></a></li>
+                  <li class="page-item" style="color:#FFCC00; border: 1px #FFCC00;"><a class="page-link" href="?page={{ lastPage }}"><span style="color:#FFCC00;">Last</span></a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+
+  <!----------------------------------------------------Pagination End ------------------------------------------->
+
+
+
+
+{% endblock content %}

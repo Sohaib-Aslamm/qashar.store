@@ -5,7 +5,7 @@ from adminpannel.decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,  login as auth_login, logout
 from adminpannel.forms import UserForm, amazonProductsForm, WhatPeopleSForm
-from adminpannel.models import amazonProduct, contact_us, WhatPeopleSay
+from adminpannel.models import amazonProduct, contact_us, WhatPeopleSay, userBlog
 
 
 # Create your views here
@@ -134,6 +134,29 @@ def adminPeopleSay(request):
 
 
 
+@login_required(login_url='/user_login')
+def adminblog(request):
+    if request.method == 'POST':
+        TIT = request.POST.get('title')
+        HD = request.POST.get('heading')
+        TGS = request.POST.get('tags')
+        QT = request.POST.get('quote')
+        QTBY = request.POST.get('quote_by')
+        CRA = request.POST.get('created_at')
+        DSC = request.POST.get('editor1')
+        ICN = request.FILES['icon']
+        reg = userBlog(title=TIT, heading=HD, tags=TGS, quote=QT, quote_by=QTBY, description=DSC, Icon=ICN,
+                       created_at=CRA)
+        reg.save()
+
+    BLGdata = userBlog.objects.all().order_by('-sNo')
+    paginator = Paginator(BLGdata, 10)
+    pageNo = request.GET.get('page')
+    BLGdataFINAL = paginator.get_page(pageNo)
+    totalPages = BLGdataFINAL.paginator.num_pages
+    context = {'BLGdata': BLGdataFINAL, 'lastPage': totalPages, 'pageList': [n + 1 for n in range(totalPages)]}
+    return render(request, 'adminBlog.html', context)
+
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Delete Functions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -147,7 +170,6 @@ def MasterDelete(request, type):
         return redirect('/admin')
 
 
-
 @login_required(login_url='/user_login')
 def Delete(request, id, type):
     if type == 'amazonProducts':
@@ -155,15 +177,18 @@ def Delete(request, id, type):
         DeleteRecord.delete()
         return redirect('/adminAmazonProducts')
 
-
     if type == 'PeopleSay':
         DeleteRecord = WhatPeopleSay.objects.get(id=id)
         DeleteRecord.delete()
         return redirect('/adminPeopleSay')
 
+    if type == 'blog':
+        DeleteRecord = userBlog.objects.get(sNo=id)
+        DeleteRecord.delete()
+        return redirect('/adminblog')
+
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Update Functions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
 
 @login_required(login_url='/user_login')
@@ -180,7 +205,6 @@ def Update(request, id, type):
             UpdateForm = amazonProductsForm(instance=UpdateRecord)
         return render(request, 'Update/updateAmazonProduct.html', {'form': UpdateForm})
 
-
     if type == 'PeopleSay':
             if request.method == 'POST':
                 UpdateRecord = WhatPeopleSay.objects.get(id=id)
@@ -192,3 +216,17 @@ def Update(request, id, type):
                 UpdateRecord = WhatPeopleSay.objects.get(id=id)
                 UpdateForm = WhatPeopleSForm(instance=UpdateRecord)
             return render(request, 'Update/updatePeopleSay.html', {'form': UpdateForm})
+
+    if type == 'blog':
+        UpdateForm = userBlog.objects.get(sNo=id)
+        if request.method == 'POST':
+            UpdateForm.title = request.POST.get('title')
+            UpdateForm.heading = request.POST.get('heading')
+            UpdateForm.tags = request.POST.get('tags')
+            UpdateForm.quote = request.POST.get('quote')
+            UpdateForm.quote_by = request.POST.get('quote_by')
+            UpdateForm.description = request.POST.get('editor1')
+            UpdateForm.save()
+            return redirect('/adminblog')
+
+        return render(request, 'Update/updateBlog.html', {'form': UpdateForm})

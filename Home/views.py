@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
-from adminpannel.models import contact_us, amazonProduct, WhatPeopleSay
+from adminpannel.models import contact_us, amazonProduct, WhatPeopleSay,  userBlog, blog_Review, SocialMedia
 # Create your views here.
 
 
@@ -43,6 +43,31 @@ def Contact(request):
         return redirect('/Contact')
     return render(request, 'contact.html')
 
+def blogHome(request):
+    BLOGDATA = userBlog.objects.all().order_by('-sNo')
+    paginator = Paginator(BLOGDATA, 9)
+    pageNo = request.GET.get('page')
+    BLOGDATAFINAL = paginator.get_page(pageNo)
+    totalPages = BLOGDATAFINAL.paginator.num_pages
+    SMDT = SocialMedia.objects.all()
+    RCPST = userBlog.objects.all().order_by('-sNo')[:2]
+    context = {'BLOGDATA': BLOGDATAFINAL, 'lastPage': totalPages, 'pageList': [n + 1 for n in range(totalPages)],
+               'RCPST': RCPST, 'SMDT': SMDT}
+    return render(request, 'blog.html', context)
+
+
+def blogReview(request):
+    if request.method == 'POST':
+        postSno = request.POST.get('postSno')
+        author = request.POST.get('author')
+        email = request.POST.get('email')
+        comment = request.POST.get('comment')
+        post_id = userBlog.objects.get(sNo=postSno)
+        sv = blog_Review(author=author, email=email, comment=comment, post=post_id)
+        sv.save()
+
+        return redirect('/blog')
+
 
 def DetailRecord(request, id, type):
     if type == 'productDetail':
@@ -50,8 +75,13 @@ def DetailRecord(request, id, type):
         context = {'rec': Record }
         return render(request, 'product_detail.html', context)
 
-
-
+    if type == 'blogDetail':
+        rdPost = userBlog.objects.filter(sNo=id)
+        coments = blog_Review.objects.filter(post__in=rdPost).order_by('-sNo')
+        SMDT = SocialMedia.objects.all()
+        RCPST = userBlog.objects.all().order_by('-sNo')[:2]
+        context = {'rdPost': rdPost, 'RCPST': RCPST, 'SMDT': SMDT, 'coments': coments}
+        return render(request, 'read_post.html', context)
 
 def About(request):
     return render(request, 'about.html')

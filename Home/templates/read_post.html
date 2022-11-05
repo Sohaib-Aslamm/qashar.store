@@ -1,0 +1,72 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Post Detail</title>{% endblock title %}
+
+{% block content %}
+
+
+
+
+<!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/breadcrumbs-bg.jpg' %});">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        <h2>Q__Blog</h2>
+        <ol>
+          <li><a href="/blog">Blog</a></li>
+          <li>Post Detail</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+
+    <!-- ======= Service Details Section ======= -->
+    <section id="service-details" class="service-details">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+          {% for data in rdPost %}
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="services-list">
+              <a href="#" class="active"><q> {{ data.quote }} </q></a>
+                <small><i>__{{ data.quote_by }}</i></small>
+
+            </div>
+
+            <div class="portfolio-info">
+              <h3>{{ data.title }}</h3>
+              <h5>{{ data.heading }}</h5>
+
+            </div>
+                <div class="row">
+                    <button class="btn btn-warning text-white mt-2"><i class="fa fa-clock"></i> {{ data.created_at }}</button>
+                </div>
+          </div>
+
+          <div class="col-lg-8">
+            <img src="{{ data.Icon.url }}" alt="" class="img-fluid services-img" style="width: 800px; height: 650px;">
+            <h3>{{ rec.title }}</h3>
+            <hr>
+
+          </div>
+
+        </div>
+
+              <hr>
+              <div class="row gy-4">
+               <p>
+              {{ data.description | safe}}
+            </p>
+              </div>
+
+          {% endfor %}
+
+      </div>
+    </section><!-- End Service Details Section -->
+
+
+{% endblock content %}

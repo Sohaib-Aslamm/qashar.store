@@ -1,0 +1,87 @@
+{% extends 'baseAdmin.html' %}
+
+{% load static %}
+
+    {% block title %} <title>Update | Blog</title> {% endblock title %}
+
+{% block header %}
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-greeno">Update Blog Section</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Dashboard</a></li>
+              <li class="breadcrumb-item text-aspire"><a href="/adminblog" class="text-greeno">Blog</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row mt-5 mb-5 card container">
+
+
+   <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+      <div class="modal-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>Title</label>
+                        <input type="text" value="{{ form.title }}" name="title" class="form-control"  required>
+                </div>
+                  <div class="col-6">
+                    <label>Heading</label>
+                       <input type="text" value="{{ form.heading }}" name="heading" class="form-control"  required>
+                </div>
+            </div>
+           <div class="row mb-3">
+                <div class="col-4">
+                    <label>Tags</label>
+                       <input type="text" value="{{ form.tags }}" name="tags" class="form-control"  required>
+                </div>
+                  <div class="col-4">
+                    <label>Quote</label>
+                       <input type="text" value="{{ form.quote }}" name="quote" class="form-control"  required>
+                </div>
+                <div class="col-4">
+                    <label>Quote_By</label>
+                       <input type="text" value="{{ form.quote_by }}" name="quote_by" class="form-control"  required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Create Post</label><br>
+              <textarea class="form-control" name="editor1">{{ form.description }}</textarea>
+                </div>
+            </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-greeno white" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn bg-greeno white">Save Post</button>
+      </div>
+             </form>
+    </div>
+
+</div>
+
+
+{% endblock content %}
