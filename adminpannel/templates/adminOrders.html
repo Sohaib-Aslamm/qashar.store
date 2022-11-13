@@ -1,0 +1,100 @@
+{% extends 'baseAdmin.html' %}
+{% load static %}
+
+
+
+
+
+    {% block title %} <title>Order | Dashboard</title> {% endblock title %}
+
+{% block header %}
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+
+
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Home</a></li>
+              <li class="breadcrumb-item text-aspire">Orders</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+{% block content %}
+
+   <!-- User Information -->
+
+      <div class="container-fluid">
+            <div class="row">
+                <div class="col-10">
+                   <h1 class="m-0 text-greeno">Orders <i class="fa fa-arrow-alt-circle-down"></i> </h1>
+                </div>
+
+            </div>
+      </div>
+<hr>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <!-- ./col -->
+
+
+            {% for orders in product_orders %}
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box " style="background-color: #404040; color: #ffcc00;">
+              <div class="inner">
+                  <p>Phone: {{ orders.c_phone }}</p>
+
+                <p>City: {{ orders.c_city }}</p>
+
+                <p class="text-greeno">Total: {{ orders.p_grand_total }} PKR</p>
+                <p class="text-warning">Status: {{ orders.status }}</p>
+
+
+
+
+              </div>
+              <div class="icon">
+                <i class="fa fa-shopping-cart"></i>
+              </div>
+              <a href="/DetailRecord/{{ orders.id }}/order" class="small-box-footer btn btn-warning">View Order <i class="fas fa-arrow-circle-right text-warning"></i></a>
+               <a href="Delete/{{ orders.id }}/deleteOrder"  class="small-box-footer btn btn-warning">Delete Order</a>
+
+            </div>
+          </div>
+            {% endfor %}
+
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+
+
+     {% endblock content %}
+
+
+
+
+
+
+

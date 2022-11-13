@@ -1,0 +1,138 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+{% load cart_tag %}
+
+{% block title %}<title>Checkout</title>{% endblock title %}
+
+{% block content %}
+
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/products/products.png' %});">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+            <h2>Your Cart</h2>
+            <ol>
+                <li><a href="/Home">Home</a></li>
+                <li>Cart Detail</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+
+
+        <form action="/placeOrder" method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="container mt-5 mb-5 card shadow-lg rounded">
+
+                {% for key,value in request.session.cart.items %}
+
+                    <input type="hidden" name="product_id" class="form-control" value="{{ value.product_id }}">
+                    <input type="hidden" name="user_id" class="form-control" value="{{ user.id }}">
+                    <input type="hidden" name="status" class="form-control" value="Pending">
+
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-2">
+                            <label>Product</label>
+                            <input type="image" name="p_image" class="form-control" src="{{ value.image }}" readonly
+                                   style="width: 120px; height: 80px;">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Price</label>
+                            <input type="text" name="p_price" class="form-control" value="{{ value.price }}" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Quantity</label>
+                            <input type="text" name="p_quantity" class="form-control" value="{{ value.quantity }}" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Total</label>
+                            <input type="text" name="p_total" class="form-control" value=" {{ value.price|multiply:value.quantity }}" readonly>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+
+
+                <div class="row mb-5 d-flex justify-content-end">
+                    <div class="col-md-4">
+                    <label class="mt-3 mr-3"><b>Grand Total:</b></label>
+                    <input type="text" class="btn btn-warning" name="p_grand_total" value="{{ cart_total_amount }}"><span> (PKR)</span>
+                        </div>
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="container mt-5 mb-5 card shadow-lg rounded">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" name="c_name" class="form-control" placeholder="enter name">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Email</label>
+                        <input type="email" name="c_email" class="form-control" placeholder="enter email">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Phone</label>
+                        <input type="text" name="c_phone" class="form-control" placeholder="+92 300 XXXXXXX">
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <label>City</label>
+                        <input type="text" name="c_city" class="form-control" placeholder="enter city">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Zip</label>
+                        <input type="text" name="c_zip" class="form-control" placeholder="enter zipcode">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Country</label>
+                        <input type="text" name="c_country" class="form-control" placeholder="country name">
+                    </div>
+                </div>
+
+
+                <div class="row mt-4 mb-4">
+                    <div class="col-md-6">
+                        <label>Address 1</label>
+                        <input type="text" name="c_address1" class="form-control" placeholder="Apartment 786, street 6, CEAS">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Address 2</label>
+                        <input type="text" name="c_address2" class="form-control" placeholder="Blue Area, Islamabad pakistan">
+                    </div>
+                </div>
+
+            </div>
+
+
+        <div class="container mb-3">
+            <div class="col-md-12">
+                <button href="#"class="btn btn-warning">Cash on delivery</button>
+            </div>
+        </div>
+
+            <div class="row mb-5 mt-5 text-center">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-warning"><i class="fa fa-gift"></i> <b>Please! click to complete order</b></button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock content %}

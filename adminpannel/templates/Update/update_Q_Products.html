@@ -1,0 +1,185 @@
+{% extends 'baseAdmin.html' %}
+
+{% load static %}
+
+    {% block title %} <title>Update | Dronza Product</title> {% endblock title %}
+
+{% block header %}
+
+     <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-greeno">Dronza Products Section</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin" class="text-greeno">Dashboard</a></li>
+              <li class="breadcrumb-item text-aspire"><a href="/adminDroneProducts" class="text-greeno">Products</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row mt-5 mb-5 card container">
+
+    <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+      <div class="modal-body">
+
+            <div class="row mb-3">
+
+                <div class="col-12">
+                    <label>Title</label>
+                        {{ form.name }}
+                </div>
+
+            </div>
+
+
+           <div class="row mb-3">
+               <div class="col-3">
+                    <label>C Price</label>
+                        {{ form.cPrice }}
+                </div>
+                <div class="col-3">
+                    <label>D Price</label>
+                        {{ form.price }}
+                </div>
+               <div class="col-3">
+                    <label>Brand</label>
+                        {{ form.brand }}
+                </div>
+            <div class="col-3">
+                    <label>Color</label>
+                        {{ form.color }}
+                </div>
+
+          </div>
+
+                <div class="row mb-4">
+
+                <div class="col-4">
+                    <label>Availability</label>
+                        {{ form.availability }}
+                </div>
+
+               <div class="col-4">
+                    <label>Category</label>
+                        {{ form.category }}
+                </div>
+                    <div class="col-4">
+                    <label>Featured</label>
+                        {{ form.featured }}
+                </div>
+
+
+            </div>
+
+
+            <div class="row mb-4">
+
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label1 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input1 }}
+                </div>
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label2 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input2 }}
+                </div>
+
+            </div>
+
+
+           <div class="row mb-4">
+
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label3 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input3 }}
+                </div>
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label4 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input4 }}
+                </div>
+
+            </div>
+
+
+           <div class="row mb-4">
+
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label5 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input5 }}
+                </div>
+                <div class="col-3">
+                    <label>Label</label>
+                        {{ form.label6 }}
+                </div>
+                <div class="col-3">
+                    <label>Input</label>
+                        {{ form.input6 }}
+                </div>
+
+            </div>
+
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label>Description</label>
+                    {{ form.description }}
+                </div>
+            </div>
+
+          <div class="row mb-3">
+              <div class="col-4">
+                  <label>Main Icon</label>
+                  {{ form.image }}
+              </div>
+
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-greeno white" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn bg-greeno white">Save Post</button>
+      </div>
+             </form>
+    </div>
+
+</div>
+
+
+{% endblock content %}

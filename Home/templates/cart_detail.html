@@ -1,0 +1,81 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+{% load cart_tag %}
+
+{% block title %}<title>Cart Detail</title>{% endblock title %}
+
+{% block content %}
+
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/products/products.png' %});">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+            <h2>Your Cart</h2>
+            <ol>
+                <li><a href="/Home">Home</a></li>
+                <li>Cart Detail</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+
+    <div class="container mt-5 mb-3 d-flex justify-content-end">
+        <a href="track_order" class="btn btn-warning mr-2"><b>Track your order</b></a>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <table class="table table-striped">
+            <thead class="bg-black text-warning">
+            <tr class="text-center">
+                <th scope="col">Product</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Operations</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for key,value in request.session.cart.items %}
+                <tr class="text-center">
+
+                    <td><img src="{{value.image}}" style="width: 50px; height: 50px;"/></td>
+
+                    <td>{{ value.name }}</td>
+
+                    <td>{{value.price}}</td>
+
+                    <td>
+                        <a href="cart/item_decrement/{{ value.product_id }}"><i class="fa fa-minus"></i></a>
+                        {{ value.quantity }}
+                        <a href="cart/item_increment/{{ value.product_id }}"><i class="fa fa-plus"></i></a>
+                    </td>
+                    <td>{{ value.price|multiply:value.quantity }} PKR</td>
+                    <td>
+                        <a href="cart/item_clear/{{ value.product_id }}"><i class="fa fa-trash text-danger"></i></a>
+                    </td>
+
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/checkout" class="btn btn-outline-warning"><b><i class="bi-bag-check-fill"></i> Checkout</b></a>
+                <a href="cart/cart_clear" class="btn btn-outline-warning"><b><i class="fa fa-broom"></i> Clear Cart</b></a>
+                <button class="btn btn-warning"><b><i class="fa fa-money-bill"></i> Grand total: {{ cart_total_amount }} (PKR) </b></button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock content %}

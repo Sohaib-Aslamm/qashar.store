@@ -22,3 +22,18 @@ def allowed_users(allowed_roles=[]):
                 return HttpResponse('Access denied to this user')
         return wrapper_func
     return al_user
+
+
+def admin_only(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            group = request.user.groups.all()[0].name
+
+            if group == 'Customer':
+                return redirect('/home')
+
+            if group == 'Admin':
+                return view_func(request, *args, **kwargs)
+
+    return wrapper_func

@@ -40,6 +40,32 @@ ServiceType = (
 )
 
 
+class Q_Products(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default="")
+    cPrice = models.CharField(max_length=100, default="")
+    price = models.CharField(max_length=100, default="")
+    brand = models.CharField(max_length=100, default="")
+    availability = models.CharField(max_length=100, choices=inStock, default="")
+    color = models.CharField(max_length=100, default="")
+    featured = models.CharField(max_length=100, choices=Featured, default="")
+    category = models.CharField(max_length=100, choices=category, default="")
+    label1 = models.CharField(max_length=100, default="")
+    label2 = models.CharField(max_length=100, default="")
+    label3 = models.CharField(max_length=100, default="")
+    label4 = models.CharField(max_length=100, default="")
+    label5 = models.CharField(max_length=100, default="")
+    label6 = models.CharField(max_length=100, default="")
+    input1 = models.CharField(max_length=100, default="")
+    input2 = models.CharField(max_length=100, default="")
+    input3 = models.CharField(max_length=100, default="")
+    input4 = models.CharField(max_length=100, default="")
+    input5 = models.CharField(max_length=100, default="")
+    input6 = models.CharField(max_length=100, default="")
+    description = models.TextField(default="")
+    image = models.FileField(upload_to='Q__Products/MainIcon', default="")
+
+
 class amazonProduct(models.Model):
     sNo = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, default="")
@@ -111,4 +137,24 @@ class blog_Review(models.Model):
     post = models.ForeignKey(userBlog, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(default=django.utils.timezone.now)
+
+
+class Place_Order(models.Model):
+    product_id = models.CharField(max_length=100, default="")
+    user_id = models.CharField(max_length=100, default="")
+    p_price = models.CharField(max_length=100, default="")
+    p_quantity = models.CharField(max_length=100, default="")
+    p_total = models.CharField(max_length=100, default="")
+    p_grand_total = models.CharField(max_length=100, default="")
+    c_name = models.CharField(max_length=100, default="")
+    c_email = models.CharField(max_length=100, default="")
+    c_phone = models.CharField(max_length=100, default="")
+    c_city = models.CharField(max_length=100, default="")
+    c_zip = models.CharField(max_length=100, default="")
+    c_country = models.CharField(max_length=100, default="")
+    c_address1 = models.CharField(max_length=100, default="")
+    c_address2 = models.CharField(max_length=100, default="")
+    status = models.CharField(max_length=100, default="")
+    order_at = models.DateTimeField(default=django.utils.timezone.now)
+
 

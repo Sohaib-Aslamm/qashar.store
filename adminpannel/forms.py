@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from adminpannel.models import amazonProduct, WhatPeopleSay
+from adminpannel.models import amazonProduct, WhatPeopleSay, Q_Products
 
 
 class UserForm(UserCreationForm):
@@ -16,6 +16,34 @@ class UserForm(UserCreationForm):
         }
 
 
+class ProductsForm(forms.ModelForm):
+    class Meta:
+        model = Q_Products
+        fields = '__all__'
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter name'}),
+            'cPrice': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'current price'}),
+            'price': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'discounted price'}),
+            'brand': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter brand'}),
+            'availability': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'featured': forms.Select(attrs={'class': 'form-control'}),
+            'color': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Blue, Red, Black'}),
+            'label1': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'label2': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'label3': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'label4': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'label5': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'label6': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'label'}),
+            'input1': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'input2': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'input3': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'input4': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'input5': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'input6': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'enter description'}),
+        }
 
 
 class amazonProductsForm(forms.ModelForm):

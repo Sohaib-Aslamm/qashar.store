@@ -71,45 +71,45 @@
                 </div>
                    <div class="row">
                     <div class="col-lg-6">
-                        <strong>{{ rec.label1 }}:</strong>
+                        <strong>{{ rec.heading1 }}:</strong>
                     </div>
                      <div class="col-lg-6">
-                        {{ rec.input1 }}
+                        {{ rec.answer1 }}
                     </div>
                 </div>
                    <div class="row">
                     <div class="col-lg-6">
-                        <strong>{{ rec.label2 }}:</strong>
+                        <strong>{{ rec.heading2 }}:</strong>
                     </div>
                      <div class="col-lg-6">
-                       {{ rec.input2 }}
+                       {{ rec.answer2 }}
                     </div>
                 </div>
                         <div class="row">
                     <div class="col-lg-6">
-                        <strong>{{ rec.label3 }}:</strong>
+                        <strong>{{ rec.heading3 }}:</strong>
                     </div>
                      <div class="col-lg-6">
-                        {{ rec.input3 }}
+                        {{ rec.answer3 }}
                     </div>
                 </div>
                    <div class="row">
                     <div class="col-lg-6">
-                        <strong>{{ rec.label4 }}:</strong>
+                        <strong>{{ rec.heading4 }}:</strong>
                     </div>
                      <div class="col-lg-6">
-                         {{ rec.input4 }}
+                         {{ rec.answer4 }}
                     </div>
                 </div>
               </ul>
             </div>
                 <div class="row">
-                    <a href="{{ rec.buyLink }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Add to cart</a>
+                    <a href="{{ rec.buyLink }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Buy Product</a>
                 </div>
           </div>
 
           <div class="col-lg-8">
-            <img src="{{ rec.image.url }}" alt="" class="img-fluid services-img" style="width: 800px; height: 650px;">
+            <img src="{{ rec.mainIcon.url }}" alt="" class="img-fluid services-img" style="width: 800px; height: 650px;">
             <h3>{{ rec.title }}</h3>
             <hr>
             <p>

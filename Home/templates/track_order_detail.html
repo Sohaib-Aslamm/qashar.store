@@ -1,0 +1,132 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+
+{% block title %}<title>Q__Store</title>{% endblock title %}
+
+{% block content %}
+
+
+
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url({% static 'Assets/Qashar/img/delivery_banner.jpg' %});">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+            <h2>Order Detail</h2>
+            <ol>
+                <li><a href="/track_order">Orders</a></li>
+                <li>Order Detail</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+
+
+
+
+
+      <div class="container mt-5 mb-5">
+        <div class="col-md-12">
+            <div class="card shadow-lg rounded">
+                <div class="card-header text-center bg-dark text-warning fw-bolder h5">
+                    <b>Status</b>: <u>{{ Record.status }}</u>
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>Customer:</b> {{ Record.c_name }}
+                        </div>
+                        <div class="col-md-4">
+                            <b>Email:</b> {{ Record.c_email }}
+                        </div>
+                        <div class="col-md-4">
+                            <b>Phone:</b> {{ Record.c_phone }}
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <b>City:</b> {{ Record.c_city }}
+                        </div>
+                        <div class="col-md-4">
+                            <b>Zipcode:</b> {{ Record.c_zip }}
+                        </div>
+                        <div class="col-md-4">
+                            <b>Country:</b> {{ Record.c_country }}
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <b>Address1:</b> {{ Record.c_address1 }}
+                        </div>
+                        <div class="col-md-6">
+                            <b>Address2:</b> {{ Record.c_address2 }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+                <div class="card mt-5 shadow-lg rounded">
+                     <div class="card-header text-center bg-dark text-warning fw-bolder h5">
+                         Cart detail
+                </div>
+                     <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                         <label class="fw-bold">Product</label>
+                         {% for data in product_data %}
+                                <p><img src="/media/{{ data.image }} " style="width: 50px; height: 30px;"></p>
+                            {% endfor %}
+
+                        </div>
+                     <div class="col-md-3">
+                         <label class="fw-bold">Title</label>
+                            {% for data in product_data %}
+                                <p>{{ data.name }}</p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-md-2">
+                           <label class="fw-bold">Price</label>
+                             {% for price in p_price %}
+                                <p>{{ price }}</p>
+                        {% endfor %}
+                        </div>
+                        <div class="col-md-2">
+                           <label class="fw-bold">Quantity</label>
+
+                        {% for prod_quantity in p_quantity %}
+                                <p>{{ prod_quantity }}</p>
+                        {% endfor %}
+                        </div>
+                         <div class="col-md-3">
+                           <label class="fw-bold">Total</label>
+                              {% for pr_total in price_total %}
+                                    <p>{{ pr_total }} PKR</p>
+                        {% endfor %}
+                        </div>
+                    </div>
+
+                      <div class="row mt-5">
+                          <div class="col-md-6">
+                          <span class="mr-5"><b>Order_at:</b> <u>{{ Record.order_at }}</u></span>
+                          </div>
+                          <div class="col-md-6">
+                          <b class="btn btn-warning fw-bold">Grand Total: <u>{{ Record.p_grand_total }} PKR</u></b>
+                         </div>
+                     </div>
+                </div>
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+{% endblock content %}
