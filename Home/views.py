@@ -100,11 +100,9 @@ def DetailRecord(request, id, type):
         price_total = Record.p_total.replace("[", "").replace("]", "").replace("'", "")
         p_quantity = Record.p_quantity.replace("[", "").replace("]", "").replace("'", "")
         p_price = Record.p_price.replace("[", "").replace("]", "").replace("'", "")
-
         price_total = price_total.split(",")
         p_quantity = p_quantity.split(",")
         p_price = p_price.split(",")
-
         context = {'Record': Record, 'price_total': price_total, 'p_quantity': p_quantity, 'p_price': p_price,
                    'product_data': product_data}
         return render(request, 'track_order_detail.html', context)
@@ -234,4 +232,3 @@ def trackOrder(request):
 def orderDone(request):
     return render(request, 'Order_Done.html')
 
-# <------------------------------------------ Detail Of Records ------------------------------------>

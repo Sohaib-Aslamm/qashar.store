@@ -83,14 +83,20 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <span class=" text-warning">&starf;&starf;&starf;&starf;&starf; {{ prd.availability }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strike>PKR: {{ prd.cPrice }}</strike><span class="text-warning"></span> PKR: {{ prd.price }}
+                                    </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-4">
                                         <a href="/cart/add/{{ prd.id }}" class="btn btn-warning text-white mt-2"><i class="fa fa-cart-shopping"></i> | Buy</a>
                                     </div>
                                     <div class="col-lg-4">
                                         <a href="/DetailRecord/{{ prd.id }}/productDetail" class="btn btn-warning text-white mt-2"><i class="fa fa-eye"></i> | View</a>
-                                    </div>
-                                     <div class="col-lg-4 mt-3">
-                                        <strike>PKR: {{ prd.price }}</strike> <br>PKR: {{ prd.cPrice }}
                                     </div>
 
                                 </div>
